@@ -13,12 +13,16 @@ void main ()
     unsigned int i, j, k;
     for (k = 1, j = 0; k < SIZE; k++)
     {
+#if 0       
         i = 0;
         while (i == 0)
         {
             i = rand() % 1000000;
         }
 //        printf("i = %d", i);
+#else
+       i = k;
+#endif
         if (i < 0x80)
         {
             Utf8[j] = i;
