@@ -41,3 +41,6 @@ unsigned int utf8_2_win1251(const char *utf8, char *win)
     win[j] = '\0';
     return j;
 }
+#undef M
+#undef NONS
+#undef SKIP_OR_NOT
