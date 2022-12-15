@@ -12,7 +12,6 @@
 unsigned int utf8_2_win1251(const char *utf8, char *win)
 {
     unsigned int dest, p, l1, l2, l3, inc, i, j, b1, b2, b3;
-    const unsigned int D = 0xF71C852E;
     const unsigned short AR[16] = { M(NONS,NONS,0x86),M(0xA8,0xB8,0x87),M(0x80,0x90,0x95),M(0x81,0x83,0x96),
                                     M(0xAA,0xBA,0x97),M(0xBD,0xBE,NONS),M(0xB2,0xB3,NONS),M(0xAF,0xBF,NONS),
                                     M(0xA3,0xBC,0x91),M(0x8A,0x9A,0x92),M(0x8C,0x9C,0x82),M(0x8E,0x9E,NONS),
@@ -24,7 +23,7 @@ unsigned int utf8_2_win1251(const char *utf8, char *win)
         inc = (0xE5000000u >> (((b1) >> 4) << 1)) & 0x3;
         p = ((((b1) << 12) + (((b2) & 0x3F) << 6) + ((b3) & 0x3F)) & (0x7FFFF >> inc)) >> (((0xC5FFAAAAu >> (((b1) >> 4) << 1)) & 0x3) * 6);
         /* Добавляем все остающиеся на месте. */
-        dest = (((inc != 0) & (((p >> 5) != 0x5) | (D >> b2))) - 1) & p; inc++;
+        dest = (((inc != 0) & (((p >> 5) != 0x5) | (0xF71C852E >> b2))) - 1) & p; inc++;
         /* Добавляем русские буквы кроме ё и Ё.*/
         dest += ((((p - 0x10) >> 6) != 0x10) - 1) & (p - 0x350);
         /* Добавляем символы из диапазонов: 0x401-0x40F, 0x451-0x45F, 0x2013-0x2022. */
