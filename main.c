@@ -54,7 +54,6 @@ void main ()
     size_t time = clock();
     res = utf8_2_win1251 (Utf8, Wincp);
     time = clock() - time;
-    Wincp[res] = 0;
     printf("%s\n\ntime = %d", Wincp, time);
     free(Utf8); free(Wincp);
     scanf("%d",&i);
