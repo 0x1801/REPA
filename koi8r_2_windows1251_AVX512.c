@@ -1,12 +1,10 @@
 #include <emmintrin.h>
 #include <immintrin.h>
 #define NONS (0x98)
-/* Convert any 8bit ASCII-compatible encoding to any other ASCII-compatible encoding. 
+/* Convert any 8bit ASCII-compatible encoding to any other ASCII-compatible encoding.  Returns size of the string. 
    Beware: 
    1) you need additional at least 64 bytes allocated after \0 in source and dest arrays. 
-   2) source & dest pointers must be alined to 64. Icc makes proper code without it, but gcc not:
-   https://godbolt.org/z/xcP9sqvj3
-   Returns size of the string. */
+   2) source & dest pointers must be alined to 64. Icc makes proper code without it, but gcc not: https://godbolt.org/z/xcP9sqvj3  */
 unsigned long long int byte_2_byte_AVX512(const char *source, char *dest) 
 {   
     /* Arrays for koi8 to windows 1251 convertation. You can replace them to any ASCII-compatible encodings. */
