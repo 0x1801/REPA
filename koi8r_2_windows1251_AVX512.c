@@ -48,7 +48,7 @@ unsigned long long int byte_2_byte_AVX512u(const char *source, char *dest)
     _mm512_storeu_epi8(dest, _mm512_mask2_permutex2var_epi8 (LUT0, zmm, mask, LUT1));
     const __m512i *src = (__m512i*) ((((unsigned long long int) source) & (~0x3F)) + 0x40);
           __m512i *dst = ((__m512i*) dest) + 0x40 - (((unsigned long long int) source) & 0x3F);
-    if ((mask = (_mm512_test_epi8_mask (zmm, zmm) | (~((unsigned long long int) (-1) << (((unsigned long long int) source) & 0x3F))))) == (unsigned long long int) (-1))      
+    if ((mask = (_mm512_test_epi8_mask (zmm, zmm)|(~((unsigned long long int)(-1) << (((unsigned long long int)source) & 0x3F))))) == (unsigned long long int)(-1))      
       do 
       { 
         _mm512_storeu_epi8(dst++, _mm512_mask2_permutex2var_epi8 (LUT0, *src, _mm512_movepi8_mask (*src), LUT1)); 
