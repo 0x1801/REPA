@@ -20,7 +20,7 @@ unsigned int utf8_2_win1251(const char *utf8, char *win)
                                     M(0xAA,0xBA,0x97),M(0xBD,0xBE,NONS),M(0xB2,0xB3,NONS),M(0xAF,0xBF,NONS),
                                     M(0xA3,0xBC,0x91),M(0x8A,0x9A,0x92),M(0x8C,0x9C,0x82),M(0x8E,0x9E,NONS),
                                     M(0x8D,0x9D,0x93),M(NONS,NONS,0x94),M(0xA1,0xA2,0x84),M(0x8F,0x9F,NONS) };
-    for (i = 0, j = 0; utf8[i] != '\0'; i += inc)
+    for (i = 0, j = 0; utf8[i] != 0; i += inc)
     {
         b1 = utf8[i]; b2 = utf8[i + 1]; b3 = utf8[i + 2];
         /* Utf8 переводим в Unicode. */
@@ -42,7 +42,7 @@ unsigned int utf8_2_win1251(const char *utf8, char *win)
         win[j] = dest;
         j += SKIP_OR_NOT;
     }
-    win[j] = '\0';
+    win[j] = 0;
     return j;
 }
 #undef M
