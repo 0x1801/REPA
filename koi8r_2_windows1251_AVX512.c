@@ -4,7 +4,8 @@
 /* Convert any 8bit ASCII-compatible encoding to any other ASCII-compatible encoding.  Returns size of the string. 
    Beware: 
    1) you need additional at least 64 bytes allocated after \0 in source and dest arrays. 
-   2) source & dest pointers must be alined to 64. Icc makes proper code without it, but gcc not: https://godbolt.org/z/xcP9sqvj3  */
+   2) source & dest pointers must be alined to 64. Icc makes proper code without it, but gcc not: https://godbolt.org/z/xcP9sqvj3  
+   3) compilation keys: -O3  -mavx512vbmi2 -mavx512vbmi */
 unsigned long long int byte_2_byte_AVX512(const char *source, char *dest) 
 {   
     /* Arrays for koi8 to windows 1251 convertation. You can replace them to any ASCII-compatible encodings. */
@@ -29,6 +30,7 @@ unsigned long long int byte_2_byte_AVX512(const char *source, char *dest)
    Beware: 
    1) you need additional at least 128 bytes allocated after \0 in source array. 
    2) source & dest does not need to be aligned on any particular boundary. 
+   3) compilation keys: -O3  -mavx512vbmi2 -mavx512vbmi.
    Returns size of the string. https://godbolt.org/z/exbqhefj4 */
 unsigned long long int byte_2_byte_AVX512u(const char *source, char *dest) 
 {   
